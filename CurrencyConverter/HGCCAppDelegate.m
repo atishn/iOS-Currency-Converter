@@ -7,6 +7,7 @@
 //
 
 #import "HGCCAppDelegate.h"
+#import "HGCCMainViewController.h"
 
 @implementation HGCCAppDelegate
 
@@ -15,6 +16,11 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
+    
+    HGCCMainViewController *mainMvc = [[HGCCMainViewController alloc] initWithNibName:@"HGCCMainViewController" bundle:nil];
+    
+    self.window.rootViewController = mainMvc;
+    
     [self.window makeKeyAndVisible];
     return YES;
 }
@@ -27,12 +33,14 @@
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
+    NSLog(@"user went home");
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
+    NSLog(@"user cabe back to app");
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
 }
 

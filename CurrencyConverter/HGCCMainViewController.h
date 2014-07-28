@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface HGCCMainViewController : UIViewController
+@interface HGCCMainViewController : UIViewController <UITextFieldDelegate, UICollectionViewDataSource>
+
+@property (nonatomic, strong) IBOutlet UITextField *userInputField;
+@property (nonatomic, strong) IBOutlet UICollectionView *rateTable;
 
 @end

@@ -10,4 +10,6 @@
 
 @interface HGCCRateCell : UICollectionViewCell
 
+@property (nonatomic, strong) IBOutlet UILabel *cellText;
+
 @end
