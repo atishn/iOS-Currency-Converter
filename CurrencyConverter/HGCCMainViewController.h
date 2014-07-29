@@ -10,7 +10,10 @@
 
 @interface HGCCMainViewController : UIViewController <UITextFieldDelegate, UICollectionViewDataSource>
 
+// Input Field
 @property (nonatomic, strong) IBOutlet UITextField *userInputField;
+
+// Rate table with Collection View
 @property (nonatomic, strong) IBOutlet UICollectionView *rateTable;
 
 @end

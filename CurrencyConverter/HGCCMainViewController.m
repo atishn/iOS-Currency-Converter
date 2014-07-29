@@ -48,10 +48,12 @@ static const NSString *NUMBERS_ONLY = @"1234567890";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    UINib *cellNib = [UINib nibWithNibName: @"HGCCRateCell" bundle:nil];
-    
-    [self.rateTable registerNib:cellNib forCellWithReuseIdentifier:@"rateCell"];
+
     [self loadRateData];
+
+    UINib *cellNib = [UINib nibWithNibName: @"HGCCRateCell" bundle:nil];
+    [self.rateTable registerNib:cellNib forCellWithReuseIdentifier:@"rateCell"];
+    [self.rateTable reloadData];
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -68,29 +70,18 @@ static const NSString *NUMBERS_ONLY = @"1234567890";
         [[AFHTTPRequestOperationManager manager] GET:composedEndPoint parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject){
             NSNumber *loadRate = [NSNumber numberWithFloat:[[responseObject objectForKey:@"rate"] floatValue]];
             blockRates[i] = loadRate;
-            [self loadFinished];
 
         } failure:^(AFHTTPRequestOperation *operation, NSError *error){
 
            NSNumber *failureRate = [NSNumber numberWithInt:FAILURE_VALUE];
             blockRates[i] = failureRate;
-            [self loadFinished];
         }];
+        self.loadCount ++;
     }
+
+
 }
 
-- (void) loadFinished {
-    self.loadCount ++;
-    if(self.loadCount == self.currencyRates.count){
-        [self.rateTable reloadData];
-    }
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 #pragma mark - text field delegate methods
 
@@ -98,8 +89,7 @@ static const NSString *NUMBERS_ONLY = @"1234567890";
 
     
     if (textField == self.userInputField) {
-        NSLog(@"Text field has changed");
-        
+
         NSString *newText = [textField.text stringByReplacingCharactersInRange:range withString:string];
         
         // Input Validation.
@@ -126,6 +116,10 @@ static const NSString *NUMBERS_ONLY = @"1234567890";
     
 }
 
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return NO;
+}
 
 
 #pragma mark - collection view methods
@@ -174,5 +168,11 @@ static const NSString *NUMBERS_ONLY = @"1234567890";
     return CGSizeMake(self.rateTable.bounds.size.width, ROW_HEIGHT);
 }
 
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
 
 @end
