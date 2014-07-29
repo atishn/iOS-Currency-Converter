@@ -11,5 +11,6 @@
 @interface HGCCRateCell : UICollectionViewCell
 
 @property (nonatomic, strong) IBOutlet UILabel *cellText;
+@property (nonatomic, strong) IBOutlet UIActivityIndicatorView *spinner;
 
 @end

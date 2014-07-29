@@ -16,12 +16,11 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
-    
-    HGCCMainViewController *mainMvc = [[HGCCMainViewController alloc] initWithNibName:@"HGCCMainViewController" bundle:nil];
-    
-    self.window.rootViewController = mainMvc;
-    
     [self.window makeKeyAndVisible];
+
+    self.mainViewController = [[HGCCMainViewController alloc] initWithNibName:@"HGCCMainViewController" bundle:nil];
+    
+    self.window.rootViewController = self.mainViewController;
     return YES;
 }
 
