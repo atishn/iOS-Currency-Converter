@@ -1,1 +1,1 @@
-Simple iOS App with Currency Converter logic
+iOS App converts the currency with Currency Converter logic using objective-c
